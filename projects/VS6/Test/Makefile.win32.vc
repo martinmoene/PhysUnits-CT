@@ -1,0 +1,103 @@
+#
+# ./projects/VC6/Test/Makefile.win32.vc
+#
+# Created by Martin on 16 October 2012.
+# Copyright 2012 Universiteit Leiden. All rights reserved.
+#
+# Distributed under the Boost Software License, Version 1.0. (See accompanying
+# file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+#
+
+HDRDIR = ../../../phys/units
+SRCDIR = ../../Test
+OBJDIR = .
+
+OBJS = \
+    Test.obj \
+    TestArithmetic.obj \
+    TestComparison.obj \
+    TestCompile.obj \
+    TestFunction.obj \
+    TestOutput.obj \
+    TestPrefix.obj \
+    TestUnit.obj
+
+HEADERS = \
+    $(HDRDIR)/io.hpp \
+    $(HDRDIR)/io_output.hpp \
+    $(HDRDIR)/io_output_eng.hpp \
+    $(HDRDIR)/other_units.hpp \
+    $(HDRDIR)/physical_constants.hpp \
+    $(HDRDIR)/quantity.hpp \
+    $(HDRDIR)/quantity_io.hpp \
+    $(HDRDIR)/quantity_io_ampere.hpp \
+    $(HDRDIR)/quantity_io_becquerel.hpp \
+    $(HDRDIR)/quantity_io_candela.hpp \
+    $(HDRDIR)/quantity_io_celsius.hpp \
+    $(HDRDIR)/quantity_io_coulomb.hpp \
+    $(HDRDIR)/quantity_io_dimensionless.hpp \
+    $(HDRDIR)/quantity_io_engineering.hpp \
+    $(HDRDIR)/quantity_io_farad.hpp \
+    $(HDRDIR)/quantity_io_gray.hpp \
+    $(HDRDIR)/quantity_io_henry.hpp \
+    $(HDRDIR)/quantity_io_hertz.hpp \
+    $(HDRDIR)/quantity_io_joule.hpp \
+    $(HDRDIR)/quantity_io_kelvin.hpp \
+    $(HDRDIR)/quantity_io_kilogram.hpp \
+    $(HDRDIR)/quantity_io_lumen.hpp \
+    $(HDRDIR)/quantity_io_lux.hpp \
+    $(HDRDIR)/quantity_io_meter.hpp \
+    $(HDRDIR)/quantity_io_newton.hpp \
+    $(HDRDIR)/quantity_io_ohm.hpp \
+    $(HDRDIR)/quantity_io_pascal.hpp \
+    $(HDRDIR)/quantity_io_radian.hpp \
+    $(HDRDIR)/quantity_io_second.hpp \
+    $(HDRDIR)/quantity_io_siemens.hpp \
+    $(HDRDIR)/quantity_io_sievert.hpp \
+    $(HDRDIR)/quantity_io_speed.hpp \
+    $(HDRDIR)/quantity_io_steradian.hpp \
+    $(HDRDIR)/quantity_io_symbols.hpp \
+    $(HDRDIR)/quantity_io_tesla.hpp \
+    $(HDRDIR)/quantity_io_volt.hpp \
+    $(HDRDIR)/quantity_io_watt.hpp \
+    $(HDRDIR)/quantity_io_weber.hpp \
+    $(SRCDIR)/TestUtil.hpp
+
+CPPFLAGS = -nologo -W3 -EHsc -D_CRT_SECURE_NO_WARNINGS -I../../../ -I%CATCH_INCLUDE%
+LFLAGS   = -nologo
+
+# compile
+# $< represents the dependent file.
+# $(*F) represents the targets base name.
+# $(*R) represents the targets base name and directory.
+
+{$(SRCDIR)}.cpp{}.obj:
+    cl -c $(CPPFLAGS) $<
+
+#    move $(*F).obj $(*R).obj
+
+# link
+# $(**R) represents all the dependents including directories.
+
+{}.obj{}.exe:
+    link $(LFLAGS) $(**R)
+
+# target-dependencies
+# $$(@B) represents the base name of the current target.
+
+all : Test.exe
+    Test.exe
+
+Test.exe : $(OBJS)
+
+$(OBJDIR)/*.obj : $(SRCDIR)/$$(@B).cpp $(HEADERS)
+
+clean:
+  -rm *.bak *.obj
+
+distclean: clean
+  -rm *.exe
+
+#
+# end of file
+#
