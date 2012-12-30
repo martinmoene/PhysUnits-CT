@@ -1,14 +1,12 @@
 Release Notes for Compiletime Quantity C++ Library.
 
 
-Release 1.0.0 - 2012-12-xx
+Release 1.0.0 - 2012-12-29
 
 First public release.
 
 Features:
-- Added converting a text representation of a quantity or unit to a quantity.
 - Added formatting of non-base units, such as Ohm, m/s.
-- Added extending dimensions with user-defined dimensions/units.
 - Added doxygen documentation.
 - Changed tests to use Catch test framework by Phil Nash,
   https://github.com/philsquared/Catch (VS2008, VS2010, GCC),
