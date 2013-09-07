@@ -499,7 +499,7 @@ public:
     * converting assignment operator.
     */
    template < typename Y >
-   this_type operator=( quantity< Dims, Y > const & rhs )
+   this_type & operator=( quantity< Dims, Y > const & rhs )
    {
       m_value = rhs.get( detail::permit<Y>() );
       return *this;
@@ -524,7 +524,7 @@ public:
     * converting assignment operator(s).
     */
    #define PHYS_UNITS_VC6_GEN_OPERATOR_ASN( T ) \
-   this_type operator=( quantity< Dims, T > const & rhs ) \
+   this_type & operator=( quantity< Dims, T > const & rhs ) \
    { \
       m_value = rhs.get( detail::permit<T>() ); \
       return *this; \
