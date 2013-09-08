@@ -715,7 +715,7 @@ operator-( quantity< Dims, X > const & lhs, quantity< Dims, Y > const & rhs )
  * quan *= num
  */
 template< typename Dims, typename X >
-inline quantity< Dims, X >
+inline quantity< Dims, X > &
 operator*=( quantity< Dims, X > & lhs, const Rep & rhs )
 {
    lhs.get( detail::permit<X>() ) *= rhs;
@@ -758,7 +758,7 @@ operator*( const Rep & lhs, quantity< Dims, Y > const & rhs )
  * quan /= num
  */
 template< typename Dims, typename X, typename Y >
-inline quantity< Dims, X >
+inline quantity< Dims, X > &
 operator/= ( quantity< Dims, X > & lhs, const Y & rhs )
 {
    lhs.get( detail::permit<X>() ) /= rhs;
