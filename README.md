@@ -9,6 +9,7 @@ This easy to use header-only library is intended to work with a wide range of co
 
 Example
 ---------
+
 ```C++
 #include "phys/units/quantity.hpp"
 
@@ -20,17 +21,21 @@ int main()
 }
 ```
 
-<h2>Other libraries</h2>
-- [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - Run-time companion of this library.
-- [PhysUnits-CT-Cpp11](https://github.com/martinmoene/PhysUnits-CT-Cpp11) - C++11 compile-time companion of this library.
-- [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
-- [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
+Other libraries
+-----------------
+
+- [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - Run-time companion of this library.  
+- [PhysUnits-CT-Cpp11](https://github.com/martinmoene/PhysUnits-CT-Cpp11) - C++11 compile-time companion of this library.  
+- [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.  
+- [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.  
 
 Usage
 -------
+
 ### Definition of terms
 
 Adapted from Boost.Units:
+
 - <b>Base dimension</b>: A base dimension is loosely defined as a measurable entity of interest; in conventional dimensional analysis, base dimensions include length ([L]), mass ([M]), time ([T]), etc.. Base dimensions are essentially a tag type and provide no dimensional analysis functionality themselves.
 - <b>Dimension</b>: A collection of zero or more base dimensions, each potentially raised to a different rational power. For example, length = [L]^1, area = [L]^2, velocity = [L]^1/[T]^1, and energy = [M]^1 [L]^2/[T]^2 are all dimensions.
 - <b>Base unit</b>: A base unit represents a specific measure of a dimension. For example, while length is an abstract measure of distance, the meter is a concrete base unit of distance. Conversions are defined using base units. Much like base dimensions, base units are a tag type used solely to define units and do not support dimensional analysis algebra.
@@ -39,6 +44,7 @@ Adapted from Boost.Units:
 - <b>Quantity</b>: A quantity represents a concrete amount of a unit. Thus, while the meter is the base unit of length in the SI system, 5.5 meters is a quantity of length in that system.
 
 ### Limitations
+
 This library only supports the use of the <em>SI unit system</em>.
 
 This library only supports <em>integral powers</em> of the dimensions.
@@ -48,6 +54,7 @@ The <em>representation or value type</em> in the implementation of quantity is f
 ### Output
 
 The following example shows the quantity type in the computation of work from force and distance and the printing of the result on standard output.
+
 ```C++
 #include <iostream>
 
@@ -77,13 +84,15 @@ int main()
 ```
 
 The output produced is:
-```
+
+```Text
 F  = 2 N
 dx = 2 m
 E  = 4 J
 ```
 
 The following example demonstrates printing in default floating point notation and in [engineering notation](http://en.wikipedia.org/wiki/Engineering_notation), using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
+
 ```C++
 #include <iostream>
 
@@ -106,14 +115,18 @@ int main()
     }
 }
 ```
+
 The output produced is:
-```
+
+```Text
 R = 4700 Ohm
 R = 4.7 kOhm
 ```
+
 See namespaces `io` and `io::eng` for further information.
 
 Instead of unit names such as J, you can also obtain the unit expressed in base dimensions.
+
 ```C++
 #include <iostream>
 
@@ -128,41 +141,51 @@ int main()
     std::cout << "J = " << joule() << std::endl;
 }
 ```
+
 The output produced is:
-```
+
+```Text
 J = m+2 kg s-2
 ```
 
 ### Convenience functions
 
 There are several convenience functions, such as:
+
 - `std::string to_magnitude( quantity<...> const & q )` - the quantity's magnitude represented as string
 - `std::string to_unit_name( quantity<...> const & q )` - the quantity's unit name, e.g. 'hertz'
 - `std::string to_unit_symbol( quantity<...> const & q )` - the quantity's unit symbol, e.g. 'Hz'
 - `std::string to_string( long double const value )` - the value of a long double represented as string
 
 In namespace `io`:
+
 - `std::string to_string( quantity<...> const & q )` - the quantity represented as string in scientific notation
 - `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in scientific notation
 
 In namespace `io::eng`:
+
 - `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation
 - `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation
 
 ### Error handling
+
 Error handling with respect to mixing incompatible dimensions occurs at compile-time.
 
 ### Mixing run-time and compile-time libraries
+
 Although this library seems to be in the `phys::units` namespace, it does so through *using* the `ct` namespace in the global namespace. So this library actually lives in the `ct::phys::units` namespace. When you want to mix this library with its compile-time companion, the `ct` namespace must be applied. This can be accomplished by defining `PHYS_UNITS_IN_CT_NAMESPACE`.
 
 Dependencies
 --------------
+
 This library has no dependencies other than the standard C++ libraries.
 
 Performance
 -------------
+
 TBD
-```
+
+```Text
 Relative running time (lower is better)
 
 Compiler        Option : double : quantity
@@ -177,6 +200,7 @@ Measured on a AMD Athlon 64 X2 Dual Core Processor 5600+, 64kB L1 Data, 64kB L1 
 
 Compilers known to work
 -------------------------
+
 - GCC 4.5.2, 4.6.2
 - MS VC6/VS6 - (VC6 lacks ADL).
 - MS VC8/VS2005
@@ -184,11 +208,13 @@ Compilers known to work
 
 Ideas for improvement
 -----------------------
+
 Allow to specify a conversion offset between two units, e.g. to make conversion between 'C and K possible (see Boost.Units).
 
 It may be nice if you can obtain a quantity in a unit representation of your choice, e.g. in kWh in stead of J [m+2 kg s-2]. See G.S. Novak. [Conversion of units of measurement (PDF)](http://reference.kfupm.edu.sa/content/c/o/conversion_of_units_of_measurement__42431.pdf)". 1 August 1997.
 
 ### References
+
 [1] Michael Kenniston. [The Quantity Library](http://home.xnet.com/~msk/quantity/quantity.html). ([Rationale](http://home.xnet.com/%7Emsk/quantity/quantity.html), Quantity [folder](http://www.xnet.com/%7Emsk/quantity)). 16 July 2001, rev 0.4.
 
 [2] Ambler Thompson and Barry N. Taylor. [Guide for the Use of the International System of Units (SI)](http://physics.nist.gov/cuu/pdf/sp811.pdf). NIST Special Publication 811 2008 Edition.
